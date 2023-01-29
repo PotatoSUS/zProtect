@@ -1,0 +1,34 @@
+name: Build
+
+on: [ pull_request, push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '8', '17' ]
+    name: Java ${{ matrix.Java }} build
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Ensure genuine gradle
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: ${{ matrix.java }}
+          name: Gradle Build
+          check-latest: true
+      - name: Make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: Run "clean" task
+        run: ./gradlew clean
+      - name: Run "build" task
+        run: ./gradlew build --no-daemon
+      - name: Capture artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: zProtect Internal Preview (Java ${{ matrix.java }})
+          path: build/libs/*
