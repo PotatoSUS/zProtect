@@ -1,0 +1,19 @@
+:root {
+  scroll-behavior: smooth;
+
+  // brand colors
+  --c-brand: #936edb !important;
+  --c-brand-light: #b39ae6 !important;
+  
+  // custom tip
+  --c-tip: #b39ae6 !important;
+}
+
+html.dark {
+  // brand colors
+  --c-brand: #936edb !important;
+  --c-brand-light: #b39ae6 !important;
+
+  // custom tip
+  --c-tip: #b39ae6 !important;
+}
