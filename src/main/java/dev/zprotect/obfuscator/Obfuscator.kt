@@ -30,6 +30,7 @@ import dev.zprotect.obfuscator.transformers.naming.LocalVariableRenamer
 import dev.zprotect.obfuscator.transformers.naming.MethodRenamer
 import dev.zprotect.obfuscator.transformers.optimization.*
 import dev.zprotect.obfuscator.transformers.poolers.NumberPooler
+import dev.zprotect.obfuscator.transformers.poolers.StringPooler
 import dev.zprotect.obfuscator.transformers.shrinking.*
 import dev.zprotect.obfuscator.transformers.shufflers.ShuffleFields
 import dev.zprotect.obfuscator.transformers.shufflers.ShuffleMethods
@@ -102,8 +103,9 @@ object Obfuscator {
             ShuffleFields,
             ShuffleMethods,
 
-            // Number
+            // Pooler
             NumberPooler,
+            StringPooler,
 
             // Optimization
             KotlinMetadataRemover,
@@ -233,14 +235,14 @@ object Obfuscator {
         // Our unique identifier so we can check if a program has been obfuscated with zProtect or not.
         // Set a comment in jar, can be seen once opening a jar in a zip viewer.
         if (watermark.value == true) {
-            outJar.setComment("보호에 의해 난독화되고 오늘 보호 난독화 장치를 구입하십시오.")
+            outJar.setComment("오줌 싸기, 맨 위에 검은 소프트웨어에서 쉬십시오! 지금 네그로워 구매.")
 
             // Dummy class.
             val dummy = ClassNode()
             dummy.visit(
                 Opcodes.V1_5,
                 Opcodes.ACC_PUBLIC,
-                "보호에 의해 난독화되고 오늘 보호 난독화 장치를 구입하십시오.",
+                "오줌 싸기, 맨 위에 검은 소프트웨어에서 쉬십시오! 지금 네그로워 구매.",
                 null,
                 "java/lang/Object",
                 null
